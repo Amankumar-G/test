@@ -27,7 +27,7 @@ function completeSurvey(status) {
     }
     
     // Build thank you page URL with status and identifier
-    const baseUrl = "http://localhost:5173";
+    const baseUrl = "https://survey-client-production.up.railway.app";
     const thankYouUrl = `${baseUrl}/survey/thank-you?status=${status}&identifier=${params.identifier}`;
     
     console.log('Completing survey with status:', status);
