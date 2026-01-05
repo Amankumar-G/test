@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Survey - Test Environment</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">📋</div>
+            <h1>Client Survey System</h1>
+            <p class="subtitle">Test Environment - Demo Survey Interface</p>
+        </div>
+
+        <div class="survey-info">
+            <div class="info-row">
+                <span class="label">Survey Identifier:</span>
+                <span class="value" id="identifier">Loading...</span>
+            </div>
+        </div>
+
+        <div class="survey-content">
+            <h2>Survey Questions</h2>
+            <p class="instruction">This is a simulated client survey. In a real scenario, survey questions would appear here. Click any status button below to simulate survey completion.</p>
+            
+            <div class="question-placeholder">
+                <div class="question">1. How satisfied are you with our service?</div>
+                <div class="options">
+                    <label><input type="radio" name="q1" checked> Very Satisfied</label>
+                    <label><input type="radio" name="q1"> Satisfied</label>
+                    <label><input type="radio" name="q1"> Neutral</label>
+                    <label><input type="radio" name="q1"> Dissatisfied</label>
+                </div>
+            </div>
+
+            <div class="question-placeholder">
+                <div class="question">2. Would you recommend us to others?</div>
+                <div class="options">
+                    <label><input type="radio" name="q2" checked> Definitely Yes</label>
+                    <label><input type="radio" name="q2"> Probably Yes</label>
+                    <label><input type="radio" name="q2"> Probably No</label>
+                    <label><input type="radio" name="q2"> Definitely No</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-section">
+            <h3>Complete Survey with Status</h3>
+            <p class="status-instruction">Select the final status to simulate different survey outcomes:</p>
+            
+            <div class="button-grid">
+                <button class="status-btn completed" onclick="completeSurvey('COMPLETED')">
+                    <span class="icon">✅</span>
+                    <span class="text">Complete</span>
+                    <span class="desc">Survey completed successfully</span>
+                </button>
+
+                <button class="status-btn quotafull" onclick="completeSurvey('QUOTAFULL')">
+                    <span class="icon">🚫</span>
+                    <span class="text">Quota Full</span>
+                    <span class="desc">Target responses reached</span>
+                </button>
+
+                <button class="status-btn quality" onclick="completeSurvey('QUALITY')">
+                    <span class="icon">⚠️</span>
+                    <span class="text">Quality Issue</span>
+                    <span class="desc">Failed quality checks</span>
+                </button>
+
+                <button class="status-btn terminated" onclick="completeSurvey('TERMINATED')">
+                    <span class="icon">❌</span>
+                    <span class="text">Terminated</span>
+                    <span class="desc">Survey terminated early</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>⚡ Test Environment Only - Cognition Research</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
