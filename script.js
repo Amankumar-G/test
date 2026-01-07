@@ -1,8 +1,31 @@
 // Parse URL parameters
 function getUrlParams() {
     const params = new URLSearchParams(window.location.search);
+
+    // Determine endpoint from query param: endpoint=client or endpoint=test
+    const rawEndpoint = params.get('endpoint') || 'Client';
+    const endpointLc = rawEndpoint.toLowerCase();
+    let endpoint = 'Client';
+    if (endpointLc === 'test' || endpointLc === 't') {
+        endpoint = 'Test';
+    } else if (endpointLc === 'client' || endpointLc === 'c') {
+        endpoint = 'Client';
+    }
+
+    // Normalize c_name (Global or Ind)
+    const rawCName = params.get('c_name') || params.get('cname') || '';
+    const cnameLc = rawCName.toLowerCase();
+    let cName = 'Global';
+    if (cnameLc === 'ind' || cnameLc === 'india' || cnameLc === 'in') {
+        cName = 'Ind';
+    } else if (cnameLc === 'global' || cnameLc === 'glb' || cnameLc === 'g') {
+        cName = 'Global';
+    }
+
     return {
-        identifier: params.get('rid') || params.get('identifier') || 'N/A'
+        identifier: params.get('rid') || params.get('identifier') || 'N/A',
+        endpoint,
+        cName
     };
 }
 
@@ -11,9 +34,14 @@ function initializePage() {
     const params = getUrlParams();
     
     document.getElementById('identifier').textContent = params.identifier;
+    const endpointEl = document.getElementById('endpoint');
+    if (endpointEl) endpointEl.textContent = params.endpoint;
+    const cNameEl = document.getElementById('cname');
+    if (cNameEl) cNameEl.textContent = params.cName;
     
     // Log parameters for debugging
     console.log('Survey initialized with identifier:', params.identifier);
+    console.log('Source endpoint:', params.endpoint, '| c_name:', params.cName);
 }
 
 // Complete survey and redirect to thank you page
@@ -27,7 +55,8 @@ function completeSurvey(status) {
     }
     
     // Build thank you page URL with status and identifier
-    const baseUrl = "https://survey-client-production.up.railway.app";
+    // const baseUrl = "http://localhost:5173"; // Change to your client URL
+     const baseUrl = "https://survey-client-production.up.railway.app";
     const thankYouUrl = `${baseUrl}/survey/thank-you?status=${status}&identifier=${params.identifier}`;
     
     console.log('Completing survey with status:', status);
