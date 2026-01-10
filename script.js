@@ -2,30 +2,16 @@
 function getUrlParams() {
     const params = new URLSearchParams(window.location.search);
 
-    // Determine endpoint from query param: endpoint=client or endpoint=test
-    const rawEndpoint = params.get('endpoint') || 'Client';
-    const endpointLc = rawEndpoint.toLowerCase();
-    let endpoint = 'Client';
-    if (endpointLc === 'test' || endpointLc === 't') {
-        endpoint = 'Test';
-    } else if (endpointLc === 'client' || endpointLc === 'c') {
-        endpoint = 'Client';
-    }
+    // Get endpoint parameter - accepts any value for testing
+    const endpoint = params.get('endpoint') || 'Client';
 
-    // Normalize c_name (Global or Ind)
-    const rawCName = params.get('c_name') || params.get('cname') || '';
-    const cnameLc = rawCName.toLowerCase();
-    let cName = 'Global';
-    if (cnameLc === 'ind' || cnameLc === 'india' || cnameLc === 'in') {
-        cName = 'Ind';
-    } else if (cnameLc === 'global' || cnameLc === 'glb' || cnameLc === 'g') {
-        cName = 'Global';
-    }
+    // Get c_name parameter - accepts any value for testing
+    const cName = params.get('c_name') || params.get('cname') || 'Global';
 
     return {
         identifier: params.get('rid') || params.get('identifier') || 'N/A',
         endpoint,
-        cName
+        cName   
     };
 }
 
